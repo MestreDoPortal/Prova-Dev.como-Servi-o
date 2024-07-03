@@ -13,18 +13,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.example.prova.model.Crud;
 import com.example.prova.service.CrudService;
 
-
-
 @Controller
 public class CrudController {
 
     @Autowired
     private CrudService crudService;
 
-    @PostMapping("/")
+    @PostMapping("/cadastrar")
     public String cadastrar(@ModelAttribute Crud crud) {
         crudService.save(crud);
-        return "crud";
+        return "redirect:/";
     }
 
     @GetMapping("/")
@@ -34,14 +32,9 @@ public class CrudController {
         return "crud";
     }
     
-    
-    @PostMapping("/")
+    @PostMapping("/excluir/{id}")
     public String excluir(@PathVariable("id") Long id) {
         crudService.excluir(id);
-        return "crud";
+        return "redirect:/";
     }
-
-
-
-
 }

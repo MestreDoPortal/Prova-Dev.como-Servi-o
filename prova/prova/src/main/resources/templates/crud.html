@@ -1,47 +1,48 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crud</title>
 </head>
 <body>
-    <form th:action="" method="post">
+    <h2>Cadastrar Novo Item</h2>
+    <form th:action="@{/cadastrar}" method="post">
         <div>
-            <label for="nome"></label>
+            <label for="nome">Nome:</label>
             <input type="text" id="nome" name="nome" placeholder="Nome" required/><br>
 
-
-            <label for="preco"></label>
-            <input type="double" id="preco" name="preco" placeholder="00,00" required/><br>
-
-
+            <label for="preco">Preço:</label>
+            <input type="text" id="preco" name="preco" placeholder="00,00" required/><br>
 
             <button type="submit">Cadastrar</button>
         </div>
     </form>
 
+    <hr>
+
+    <h2>Lista de Itens</h2>
     <table>
         <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Preço</th>
-        </tr>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Preço</th>
+                <th>Ações</th>
+            </tr>
         </thead>
         <tbody>
-        <tr th:each="item : ${itens}">
-            <td th:text="${item.id}">ID</td>
-            <td th:text="${item.nome}">Nome</td>
-            <td th:text="${item.preco}">Preço</td>
-
-            <td>
-                <form th:action="@{(id=${item.id})}" method="post">
-                    <input type="hidden" name="_method" value="DELETE">
-                    <button type="submit" class="delete-button">Excluir</button>
-                </form>
-            </td>
-        </tr>
+            <tr th:each="item : ${itens}">
+                <td th:text="${item.id}">ID</td>
+                <td th:text="${item.nome}">Nome</td>
+                <td th:text="${item.preco}">Preço</td>
+                <td>
+                    <form th:action="@{/excluir/{id}(id=${item.id})}" method="post">
+                        <input type="hidden" name="_method" value="POST">
+                        <button type="submit" class="delete-button">Excluir</button>
+                    </form>
+                </td>
+            </tr>
         </tbody>
     </table>
 </body>
