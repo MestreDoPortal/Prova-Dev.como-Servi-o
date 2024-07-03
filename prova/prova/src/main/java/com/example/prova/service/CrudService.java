@@ -1,4 +1,4 @@
-package service;
+package com.example.prova.service;
 
 import java.util.List;
 
@@ -20,6 +20,10 @@ public class CrudService {
 
     public List<Crud> getAllItens() {
         return crudRepository.findAll();
+    }
+
+    public void excluir(Long id) {
+        crudRepository.deleteById(id);
     }
     
 
